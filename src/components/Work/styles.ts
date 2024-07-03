@@ -17,10 +17,13 @@ export const styles = StyleSheet.create({
   },
   descriptionText: {
     color: "#fdfcfe",
-    fontSize: 12,
+    fontSize: 14,
     flex: 1,
   },
-  buttonDelete: {
-    
-  },
+  taskFind: {
+    color: "#808080",
+    fontSize: 14,
+    textDecorationLine: "line-through",
+    flex: 1,
+  }
 })

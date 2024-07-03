@@ -1,31 +1,24 @@
 import { Image, Text, TouchableOpacity, View } from "react-native";
 
 import { styles } from "./styles";
-import { useState } from "react";
 
 type WorkProps = {
   task: string;
   onRemove: () => void;
-  isActive: boolean;
+  isActive: () => void;
+  status: boolean;
 };
 
-const Work = ({ task, onRemove, isActive }: WorkProps) => {
-  const handlePress = () => {
-    if (isActive) {
-      console.log("Tarefa concluída");
-    } else {
-      console.log("Tarefa não concluída");
-    }
-  }
+const Work = ({ task, onRemove, isActive, status }: WorkProps) => {
 
   return (
     <View style={styles.container}>
-        <TouchableOpacity onPress={handlePress}>
+        <TouchableOpacity onPress={isActive}>
           <Image 
-            source={isActive ? require("../../../assets/verfi.png") : require("../../../assets/radion.png")}
+            source={status ? require("../../../assets/verfi.png") : require("../../../assets/radion.png")}
           />
         </TouchableOpacity>
-        <Text style={styles.descriptionText}>{task}</Text>
+        <Text style={ !status ? styles.descriptionText : styles.taskFind}>{task}</Text>
         <TouchableOpacity onPress={onRemove}>
           <Image 
             source={require("../../../assets/lixeira.png")}

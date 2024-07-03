@@ -33,9 +33,21 @@ export const Home = () => {
     ]);
     setNewTask("");
     setTaskId(taskId + 1);
-
-    console.log(tasks);
   };
+
+  const handleTaskRemove = (id: number) => {
+
+    Alert.alert("Deseja remover esta tarefa?", "", [
+      {
+        text: "Não",
+        style: "cancel",
+      },
+      {
+        text: "Sim",
+        onPress: () => setTasks((prevState) => prevState.filter((task) => task.id !== id))
+      }
+    ])
+  }
 
   const handleTaskToggle = (id: number) => {
     setTasks((prevState) =>
@@ -73,7 +85,7 @@ export const Home = () => {
         <View style={styles.count}>
           <Text style={styles.progresCheck}>Concluidas</Text>
           <Text style={styles.countView}>
-            {tasks.filter((task) => task).length}
+            {tasks.filter((task) => task.completed).length}
           </Text>
         </View>
       </View>
@@ -85,8 +97,9 @@ export const Home = () => {
           <Work 
             key={item.id} 
             task={item.text} 
-            isActive={item.completed}
-            onRemove={() => ({})} 
+            isActive={() => handleTaskToggle(item.id)}
+            status={item.completed}
+            onRemove={() => handleTaskRemove(item.id)} 
           />
         )}
         showsVerticalScrollIndicator={false}
